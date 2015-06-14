@@ -3,8 +3,13 @@ head
 
 body
   h1 Welcome to Meteor!
-  {{> hello}}
+  {{> activitycard}}
 
 template(name="hello")
   button Click Me
   p You've pressed the button #{counter} times.
+
+template(name="activitycard")
+  h1 Foo
+  each activities
+    {{name}}

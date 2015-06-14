@@ -14,6 +14,20 @@ if (Meteor.isClient) {
       Session.set('counter', Session.get('counter') + 1);
     }
   });
+
+  Template.activitycard.helpers({
+    activities: [
+      {
+        name: "Pool"
+      },
+      {
+        name: "Bordtennis"
+      },
+      {
+        name: "Bowling"
+      }
+    ]
+  })
 }
 
 if (Meteor.isServer) {
