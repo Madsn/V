@@ -2,8 +2,10 @@ head
   title V
 
 body
-  h1 Welcome to Meteor!
-  {{> activitycard}}
+  | {{> navbar}}
+  div#content
+    h1 Welcome to Meteor!
+    | {{> activitycard}}
 
 template(name="hello")
   button Click Me
@@ -11,5 +13,17 @@ template(name="hello")
 
 template(name="activitycard")
   h1 Foo
+  ul
   each activities
-    {{name}}
+    li {{name}}
+
+template(name="navbar")
+  nav.navbar.navbar-default.navbar-fixed-top(role='navigation')
+    .container-fluid
+      .container
+        .navbar-header
+          a.navbar-brand(href='#') V
+        .navbar-collapse.collapse
+          ul.nav.navbar-nav
+          ul.nav.navbar-nav.navbar-right
+            {{> loginButtons}}
