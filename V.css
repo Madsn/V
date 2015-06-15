@@ -2,3 +2,16 @@
 #content {
 	margin-top: 80px;
 }
+
+.activityimage {
+    position: relative;
+    border: none;
+}
+ 
+.caption {
+    position: absolute;
+    top: 40%;
+    left: 0;
+    width: 100%;
+    font-size: 150%;
+}
