@@ -3,7 +3,7 @@ Activities = new Meteor.Collection('activities');
 if (Meteor.isClient) {
   Meteor.subscribe('activities');
 
-  Template.activitycard.helpers({
+  Template.Activitycards.helpers({
     activities: function() {
       return Activities.find();
     },
@@ -36,4 +36,9 @@ if (Meteor.isServer) {
 
 Router.route('/', function () {
   this.render('Home');
+});
+
+Router.route('/activities/:_id', function () {
+  var activity = Activities.findOne({_id: this.params._id});
+  this.render('ActivityDashboard', {data: activity});
 });

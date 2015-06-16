@@ -1,14 +1,14 @@
 
-template(name="home")
+template(name="Home")
   head
     title V
   body
     .container
-      | {{> navbar}}
+      | {{> Navbar}}
       div#content
-        | {{> activitycard}}
+        | {{> Activitycards}}
 
-template(name="navbar")
+template(name="Navbar")
   nav.navbar.navbar-default.navbar-fixed-top(role='navigation')
     .container-fluid
       .container
@@ -19,11 +19,16 @@ template(name="navbar")
           ul.nav.navbar-nav.navbar-right
             | {{> loginButtons}}
 
-template(name="activitycard")
+template(name="Activitycards")
   .row
     each activities
-      .col-lg-4.col-md-6.col-xs-12
-        .thumbnail.activityimage.text-center
-          img.img-responsive(style="opacity: 0.4", src="{{img}}")
-          .caption
-            h1 {{name}}
+      a(href="activities/{{_id}}")
+        .col-lg-4.col-md-6.col-xs-12
+          .thumbnail.activityimage.text-center
+            img.img-responsive(style="opacity: 0.4", src="{{img}}")
+            .caption
+              h1 {{name}}
+
+template(name="ActivityDashboard")
+  h1 Dashboard for Activity {{name}}
+  img(src="{{img}}")
