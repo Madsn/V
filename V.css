@@ -8,10 +8,10 @@
     border: none;
 }
  
-.caption {
+.caption h1 {
     position: absolute;
     top: 40%;
     left: 0;
     width: 100%;
-    font-size: 150%;
+    font-size: 400%;
 }

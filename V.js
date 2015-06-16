@@ -5,13 +5,16 @@ if (Meteor.isClient) {
   Template.activitycard.helpers({
     activities: [
       {
-        name: "Pool"
+        name: "Pool",
+        img: "http://i.imgur.com/JN1Bgld.jpg"
       },
       {
-        name: "Bordtennis"
+        name: "Tabletennis",
+        img: "http://i.imgur.com/iGB9C24.jpg"
       },
       {
-        name: "Bowling"
+        name: "Foosball",
+        img: "http://i.imgur.com/pD6PNLE.jpg"
       }
     ]
   })

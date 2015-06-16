@@ -11,9 +11,9 @@ template(name="activitycard")
     each activities
       .col-lg-4.col-md-6.col-xs-12
         .thumbnail.activityimage.text-center
-          img.img-responsive(style="opacity: 0.4", src="https://placeholdit.imgix.net/~text?txtsize=1&txt=450%C3%97150&w=450&h=250")
+          img.img-responsive(style="opacity: 0.4", src="{{img}}")
           .caption
-            p {{name}}
+            h1 {{name}}
 
 template(name="navbar")
   nav.navbar.navbar-default.navbar-fixed-top(role='navigation')
