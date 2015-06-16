@@ -22,9 +22,9 @@ template(name="Navbar")
 template(name="Activitycards")
   .row
     each activities
-      a(href="activities/{{_id}}")
-        .col-lg-4.col-md-6.col-xs-12
-          .thumbnail.activityimage.text-center
+      .col-lg-4.col-md-6.col-xs-12
+        .thumbnail.activityimage.text-center
+          a(href="activities/{{_id}}")
             img.img-responsive(style="opacity: 0.4", src="{{img}}")
             .caption
               h1 {{name}}

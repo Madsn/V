@@ -8,10 +8,14 @@
     border: none;
 }
  
-.caption h1 {
+.thumbnail .caption {
     position: absolute;
-    top: 40%;
+    top: 35%;
     left: 0;
     width: 100%;
+    padding: 0px;
+}
+
+.caption h1 {
     font-size: 400%;
 }
