@@ -1,12 +1,14 @@
-
-template(name="Home")
+template(name="layout")
   head
     title V
   body
     .container
       | {{> Navbar}}
       div#content
-        | {{> Activitycards}}
+        | {{>yield}}
+
+template(name="Home")
+  | {{> Activitycards}}
 
 template(name="Navbar")
   nav.navbar.navbar-default.navbar-fixed-top(role='navigation')

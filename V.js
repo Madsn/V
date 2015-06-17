@@ -42,3 +42,7 @@ Router.route('/activities/:_id', function () {
   var activity = Activities.findOne({_id: this.params._id});
   this.render('ActivityDashboard', {data: activity});
 });
+
+Router.configure({
+    layoutTemplate: 'layout'
+});
