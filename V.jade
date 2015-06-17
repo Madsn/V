@@ -15,7 +15,7 @@ template(name="Navbar")
     .container-fluid
       .container
         .navbar-header
-          a.navbar-brand(href='#') V
+          a.navbar-brand(href='/') V
         .navbar-collapse.collapse
           ul.nav.navbar-nav
           ul.nav.navbar-nav.navbar-right
@@ -33,4 +33,13 @@ template(name="Activitycards")
 
 template(name="ActivityDashboard")
   h1 Dashboard for Activity {{name}}
-  img(src="{{img}}")
+  table.table.table-striped
+    thead
+      tr
+        th Rank
+        th Name
+    tbody
+      each players
+        tr
+          td {{index}}
+          td {{playername}}
