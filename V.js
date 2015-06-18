@@ -1,10 +1,16 @@
 Activities = new Meteor.Collection('activities');
-Players = new Meteor.Collection('players2');
+Players = new Meteor.Collection('players');
+
+Activities.helpers({
+  players: function() {
+    return Players.find({activity: this._id});
+  }
+});
 
 if (Meteor.isClient) {
   Meteor.subscribe('activities');
-  Meteor.subscribe('players2');
-
+  Meteor.subscribe('players');
+  
   Template.Activitycards.helpers({
     activities: function() {
       return Activities.find();
@@ -16,7 +22,7 @@ if (Meteor.isClient) {
   
   Template.ActivityDashboard.helpers({
     players: function() {
-      return Players.find().map(function(document, index){
+      return this.players().map(function(document, index){
         document.index = index + 1;
         return document;
       });
@@ -43,13 +49,16 @@ if (Meteor.isServer) {
     }
     if (Players.find().count() === 0){
       Players.insert({
-          playername: "Rip"
+          playername: "Rip",
+          activity: Activities.findOne({name: "Pool"})._id
         });
       Players.insert({
-          playername: "Rap"
+          playername: "Rap",
+          activity: Activities.findOne({name: "Tabletennis"})._id
         });
       Players.insert({
-          playername: "Rup"
+          playername: "Rup",
+          activity: Activities.findOne({name: "Foosball"})._id
         });
     }
   });

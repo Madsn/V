@@ -12,3 +12,4 @@ ian:accounts-ui-bootstrap-3
 twbs:bootstrap
 accounts-password
 iron:router
+dburles:collection-helpers
