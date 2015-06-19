@@ -45,7 +45,7 @@ if (Meteor.isClient) {
   Template.ActivityDashboard.events({
     "click #addMe": function(){
       Players.insert({
-        playername: "foo",
+        playername: Meteor.user().username,
         activity: this._id,
         user: Meteor.userId()
       });
@@ -55,6 +55,10 @@ if (Meteor.isClient) {
       Players.remove(x._id);
     }
   })
+  
+  Accounts.ui.config({
+    passwordSignupFields: "USERNAME_AND_EMAIL"
+  });
 }
 
 if (Meteor.isServer) {
