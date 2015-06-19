@@ -7,6 +7,12 @@ Activities.helpers({
   }
 });
 
+Players.helpers({
+  getActivity: function() {
+    return Activities.findOne({id: this.activity});
+  }
+});
+
 if (Meteor.isClient) {
   Meteor.subscribe('activities');
   Meteor.subscribe('players');
@@ -26,8 +32,29 @@ if (Meteor.isClient) {
         document.index = index + 1;
         return document;
       });
+    },
+    userInPlayersList: function() {
+      var x = Players.findOne({
+        activity:this._id, 
+        user: Meteor.userId()
+      });
+      return x ? true : false;
     }
   });
+  
+  Template.ActivityDashboard.events({
+    "click #addMe": function(){
+      Players.insert({
+        playername: "foo",
+        activity: this._id,
+        user: Meteor.userId()
+      });
+    },
+    "click #removeMe": function(){
+      var x = Players.findOne({activity: this._id, user: Meteor.userId()});
+      Players.remove(x._id);
+    }
+  })
 }
 
 if (Meteor.isServer) {
@@ -45,20 +72,6 @@ if (Meteor.isServer) {
       Activities.insert({
           name: "Foosball",
           img: "http://i.imgur.com/pD6PNLE.jpg"
-        });
-    }
-    if (Players.find().count() === 0){
-      Players.insert({
-          playername: "Rip",
-          activity: Activities.findOne({name: "Pool"})._id
-        });
-      Players.insert({
-          playername: "Rap",
-          activity: Activities.findOne({name: "Tabletennis"})._id
-        });
-      Players.insert({
-          playername: "Rup",
-          activity: Activities.findOne({name: "Foosball"})._id
         });
     }
   });

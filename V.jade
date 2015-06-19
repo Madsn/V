@@ -43,3 +43,8 @@ template(name="ActivityDashboard")
         tr
           td {{index}}
           td {{playername}}
+  if currentUser
+    if userInPlayersList
+      button#removeMe Remove me from this list
+    else
+      button#addMe Add me to this list 
