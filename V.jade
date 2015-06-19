@@ -15,9 +15,11 @@ template(name="Navbar")
     .container-fluid
       .container
         .navbar-header
-          a.navbar-brand(href='/') V
+          a.navbar-brand(href="/") V
         .navbar-collapse.collapse
           ul.nav.navbar-nav
+            li 
+              a(href="/challenges") Challenges
           ul.nav.navbar-nav.navbar-right
             | {{> loginButtons}}
 
@@ -29,7 +31,7 @@ template(name="Activitycards")
           a(href="activities/{{_id}}")
             img.img-responsive(style="opacity: 0.4", src="{{img}}")
             .caption
-              h1 {{name}}
+              h1= name
 
 template(name="ActivityDashboard")
   h1 Dashboard for Activity {{name}}
@@ -38,13 +40,33 @@ template(name="ActivityDashboard")
       tr
         th Rank
         th Name
+        th
     tbody
       each players
         tr
-          td {{index}}
-          td {{playername}}
+          td= index
+          td= playername
+          td
+            a
+              i#challenge.clickable.glyphicon.glyphicon-ok
   if currentUser
     if userInPlayersList
       button#removeMe Remove me from this list
     else
-      button#addMe Add me to this list 
+      button#addMe Add me to this list
+
+template(name="Challenges")
+  h1 stuff
+  table.table.table-striped
+    thead
+      tr
+        th Activity
+        th Challenger
+        th Challengee
+    tbody
+      each challenges
+        tr
+          td
+            a(href="activities/{{getActivity._id}}") {{getActivity.name}}
+          td= challengerName
+          td= challengeeName

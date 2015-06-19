@@ -19,3 +19,8 @@
 .caption h1 {
     font-size: 400%;
 }
+
+.clickable {
+    cursor: pointer;
+    cursor: hand;
+}
