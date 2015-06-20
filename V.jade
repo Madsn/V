@@ -47,8 +47,11 @@ template(name="ActivityDashboard")
           td= index
           td= getUsername
           td
-            a.challengeLink
-              i(id="{{_id}}").clickable.glyphicon.glyphicon-ok
+            if alreadyChallenged
+              p Already challenged this player
+            else
+              a.challengeLink
+                i(id="{{_id}}").clickable.glyphicon.glyphicon-ok
   if currentUser
     if userInPlayersList
       button#removeMe Remove me from this list

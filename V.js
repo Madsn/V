@@ -21,6 +21,12 @@ Players.helpers({
   },
   getReceivedChallenges: function() {
     return Challenges.find({opponent: this._id});
+  },
+  alreadyChallenged: function() {
+    return Challenges.findOne({
+      challenger: Meteor.userId(),
+      activity: this.activity
+    });
   }
 });
 
