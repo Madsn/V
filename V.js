@@ -93,9 +93,15 @@ if (Meteor.isClient) {
       });
     },
     "click #removeMe": function(){
-      var x = Players.findOne({activity: this._id, user: Meteor.userId()});
+      var x = Players.findOne({
+        activity: this._id,
+        user: Meteor.userId()
+      });
       Players.remove(x._id);
-      var chal = Challenges.find({challenger: x.user, activity: x.activity}).fetch();
+      var chal = Challenges.find({
+        challenger: x.user, 
+        activity: x.activity
+      }).fetch();
       for (var i in chal) {
         Challenges.remove(chal[i]._id);
       }
@@ -107,6 +113,14 @@ if (Meteor.isClient) {
         opponent: event.target.id 
       };
       Challenges.insert(x);
+    },
+    "click .deleteChallengeLink": function(event){
+      var x = Challenges.findOne({
+        activity: this.activity,
+        challenger: Meteor.userId(),
+        opponent: event.target.id 
+      });
+      Challenges.remove(x._id);
     }
   })
   

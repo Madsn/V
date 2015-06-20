@@ -50,10 +50,11 @@ template(name="ActivityDashboard")
             if equals currentUser._id user
               p Can't challenge self
             else if alreadyChallenged
-              p Already challenged this player
+              a.deleteChallengeLink
+                i(id="{{_id}}").clickable.glyphicon.glyphicon-remove
             else
               a.challengeLink
-                i(id="{{_id}}").clickable.glyphicon.glyphicon-ok
+                i(id="{{_id}}").clickable.glyphicon.glyphicon-bullhorn
   if currentUser
     if userInPlayersList
       button#removeMe Remove me from this list
