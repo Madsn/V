@@ -85,6 +85,10 @@ if (Meteor.isClient) {
     "click #removeMe": function(){
       var x = Players.findOne({activity: this._id, user: Meteor.userId()});
       Players.remove(x._id);
+      var chal = Challenges.find({challenger: x.user, activity: x.activity}).fetch();
+      for (var i in chal) {
+        Challenges.remove(chal[i]._id);
+      }
     },
     "click .challengeLink": function(event){
       var x = {

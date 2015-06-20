@@ -45,7 +45,7 @@ template(name="ActivityDashboard")
       each players
         tr
           td= index
-          td= playername
+          td= getUsername
           td
             a.challengeLink
               i(id="{{_id}}").clickable.glyphicon.glyphicon-ok
