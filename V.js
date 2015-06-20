@@ -12,20 +12,26 @@ Players.helpers({
   getActivity: function() {
     return Activities.findOne({id: this.activity});
   },
+  getUsername: function() {
+    var user = Meteor.users.findOne({_id: this.user});
+    return user ? user.username : "";
+  },
   getSentChallenges: function() {
     return Challenges.find({challenger: this._id});
   },
   getReceivedChallenges: function() {
-    return Challenges.find({challengee: this._id});
+    return Challenges.find({opponent: this._id});
   }
 });
 
 Challenges.helpers({
   challengerName: function(){
-    return Meteor.users.findOne(this.challenger).username;
+    var challenger = Meteor.users.findOne(this.challenger);
+    return challenger ? challenger.username : "";
   },
-  challengeeName: function(){
-    return Meteor.users.findOne(this.challengee).username;
+  opponentName: function(){
+    var opponent = Players.findOne(this.opponent);
+    return opponent ? opponent.getUsername() : "";
   },
   getActivity: function(){
     var x = Activities.findOne(this.activity);
@@ -56,7 +62,7 @@ if (Meteor.isClient) {
     },
     userInPlayersList: function() {
       var x = Players.findOne({
-        activity:this._id, 
+        activity: this._id, 
         user: Meteor.userId()
       });
       return x ? true : false;
@@ -72,7 +78,6 @@ if (Meteor.isClient) {
   Template.ActivityDashboard.events({
     "click #addMe": function(){
       Players.insert({
-        playername: Meteor.user().username,
         activity: this._id,
         user: Meteor.userId()
       });
@@ -81,12 +86,13 @@ if (Meteor.isClient) {
       var x = Players.findOne({activity: this._id, user: Meteor.userId()});
       Players.remove(x._id);
     },
-    "click #challenge": function(){
-      Challenges.insert({
+    "click .challengeLink": function(event){
+      var x = {
         activity: this.activity,
         challenger: Meteor.userId(),
-        challengee: Meteor.userId()
-      });
+        opponent: event.target.id 
+      };
+      Challenges.insert(x);
     }
   })
   

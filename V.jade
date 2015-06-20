@@ -47,8 +47,8 @@ template(name="ActivityDashboard")
           td= index
           td= playername
           td
-            a
-              i#challenge.clickable.glyphicon.glyphicon-ok
+            a.challengeLink
+              i(id="{{_id}}").clickable.glyphicon.glyphicon-ok
   if currentUser
     if userInPlayersList
       button#removeMe Remove me from this list
@@ -62,11 +62,11 @@ template(name="Challenges")
       tr
         th Activity
         th Challenger
-        th Challengee
+        th Opponent
     tbody
       each challenges
         tr
           td
             a(href="activities/{{getActivity._id}}") {{getActivity.name}}
           td= challengerName
-          td= challengeeName
+          td= opponentName
