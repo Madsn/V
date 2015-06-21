@@ -158,6 +158,20 @@ Router.route('/challenges', function () {
   this.render('Challenges');
 });
 
+Router.route('/challenge/:_id/:activity', function () {
+  var challenge = Challenges.findOne({
+    challenger: Meteor.userId(),
+    opponent: this.params._id,
+    activity: this.params.activity
+  });
+  this.render('Challenge', {data: challenge});
+});
+
+Router.route('/challenge/:_id', function () {
+  var challenge = Challenges.findOne(this.params._id);
+  this.render('Challenge', {data: challenge});
+});
+
 Router.route('/activities/:_id', function () {
   var activity = Activities.findOne({_id: this.params._id});
   this.render('ActivityDashboard', {data: activity});

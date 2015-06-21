@@ -51,7 +51,9 @@ template(name="ActivityDashboard")
               p Can't challenge self
             else if alreadyChallenged
               a.deleteChallengeLink
-                i(id="{{_id}}").clickable.glyphicon.glyphicon-remove
+                i(id="{{_id}}").clickable.glyphicon.glyphicon-remove &nbsp;
+              a(href="/challenge/{{_id}}/{{activity}}")
+                i.clickable.glyphicon.glyphicon-eye-open
             else
               a.challengeLink
                 i(id="{{_id}}").clickable.glyphicon.glyphicon-bullhorn
@@ -69,10 +71,21 @@ template(name="Challenges")
         th Activity
         th Challenger
         th Opponent
+        th
     tbody
       each challenges
         tr
           td
-            a(href="activities/{{getActivity._id}}") {{getActivity.name}}
+            a(href="/activities/{{getActivity._id}}") {{getActivity.name}}
           td= challengerName
           td= opponentName
+          td
+            a(href="/challenge/{{_id}}")
+              i.clickable.glyphicon.glyphicon-eye-open
+          
+template(name="Challenge")
+  h1 Challenge view
+  ul
+    li= challengerName
+    li= opponentName
+    li= getActivity.name
