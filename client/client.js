@@ -72,7 +72,7 @@ Template.ActivityDashboard.events({
       user: Meteor.userId()
     });
     var chal = Challenges.find({
-      challenger: x._id, 
+      $or: [{challenger: x._id}, {opponent: x._id}],
       activity: x.activity
     }).fetch();
     for (var i in chal) {
