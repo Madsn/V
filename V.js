@@ -23,17 +23,23 @@ Players.helpers({
     return Challenges.find({opponent: this._id});
   },
   alreadyChallenged: function() {
+    var player = Players.findOne({activity: this.activity, user: Meteor.userId()});
+    if (!player) return false;
     return Challenges.findOne({
-      challenger: Meteor.userId(),
+      challenger: player._id,
       activity: this.activity
     });
+  },
+  userParticipatesInActivity: function() {
+    var player = Players.findOne({activity: this.activity, user: Meteor.userId()});
+    return player ? true : false;
   }
 });
 
 Challenges.helpers({
   challengerName: function(){
-    var challenger = Meteor.users.findOne(this.challenger);
-    return challenger ? challenger.username : "";
+    var challenger = Players.findOne(this.challenger);
+    return challenger ? challenger.getUsername() : "";
   },
   opponentName: function(){
     var opponent = Players.findOne(this.opponent);
@@ -76,23 +82,34 @@ if (Meteor.isClient) {
         user: Meteor.userId()
       });
       return x ? true : false;
+    },
+    getChallengeId: function() {
+      var player = Players.findOne({user: Meteor.userId(), activity: this.activity});
+      return Challenges.findOne({
+        opponent: this._id,
+        activity: this.activity,
+        challenger: player._id
+      })._id;
     }
   });
   
   var deleteChallengeFn = function(event) {
     console.log(event.target);
-    var x = Challenges.findOne({
-      activity: event.target.name,
-      challenger: Meteor.userId(),
-      opponent: event.target.id 
-    });
-    Challenges.remove(x._id);
+    var x = Challenges.findOne(event.target.id);
+    if (x) {
+      Challenges.remove(x._id);
+    } else {
+      console.error("Challenge with ID " + event.target.id + " not found");
+    }
   };
   
   Template.Challenges.helpers({
     challenges: function() {
       return Challenges.find(); 
-    },
+    }
+  });
+  
+  Template.Challenges.events({
     "click .deleteChallengeLink": deleteChallengeFn
   });
   
@@ -108,20 +125,24 @@ if (Meteor.isClient) {
         activity: this._id,
         user: Meteor.userId()
       });
-      Players.remove(x._id);
       var chal = Challenges.find({
-        challenger: x.user, 
+        challenger: x._id, 
         activity: x.activity
       }).fetch();
       for (var i in chal) {
         Challenges.remove(chal[i]._id);
       }
+      Players.remove(x._id);
     },
     "click .challengeLink": function(event){
+      var player = Players.findOne({
+        activity: this.activity,
+        user: Meteor.userId()
+      });
       var x = {
         activity: this.activity,
-        challenger: Meteor.userId(),
-        opponent: event.target.id 
+        challenger: player._id,
+        opponent: event.target.id
       };
       Challenges.insert(x);
     },

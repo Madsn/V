@@ -47,12 +47,12 @@ template(name="ActivityDashboard")
           td= index
           td= getUsername
           td
-            if currentUser
+            if userParticipatesInActivity
               if equals currentUser._id user
                 p Can't challenge self
               else if alreadyChallenged
                 a.deleteChallengeLink
-                  i(id="{{_id}}", name="{{activity}}").clickable.glyphicon.glyphicon-remove &nbsp;
+                  i(id="{{getChallengeId}}").clickable.glyphicon.glyphicon-remove &nbsp;
                 a(href="/challenge/{{_id}}/{{activity}}")
                   i.clickable.glyphicon.glyphicon-eye-open
               else
@@ -79,12 +79,12 @@ template(name="Challenges")
           td
             a(href="/activities/{{getActivity._id}}") {{getActivity.name}}
           td 
-            a(href="/users/self") {{challengerName}}
+            a(href="/users/playerid/{{challenger}}") {{challengerName}}
           td 
             a(href="/users/playerid/{{opponent}}") {{opponentName}}
           td
             a.deleteChallengeLink
-              i(id="{{_id}}", name="{{getActivity._id}}").clickable.glyphicon.glyphicon-remove &nbsp;
+              i(id="{{_id}}").clickable.glyphicon.glyphicon-remove &nbsp;
             a(href="/challenge/{{_id}}")
               i.clickable.glyphicon.glyphicon-eye-open
           
@@ -92,7 +92,7 @@ template(name="Challenge")
   h1 Challenge view
   ul
     li
-      a(href="/users/self") {{challengerName}}
+      a(href="/users/playerid/{{challenger}}") {{challengerName}}
     li 
       a(href="/users/playerid/{{opponent}}") {{opponentName}}
     li
