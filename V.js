@@ -79,10 +79,21 @@ if (Meteor.isClient) {
     }
   });
   
+  var deleteChallengeFn = function(event) {
+    console.log(event.target);
+    var x = Challenges.findOne({
+      activity: event.target.name,
+      challenger: Meteor.userId(),
+      opponent: event.target.id 
+    });
+    Challenges.remove(x._id);
+  };
+  
   Template.Challenges.helpers({
     challenges: function() {
       return Challenges.find(); 
-    }
+    },
+    "click .deleteChallengeLink": deleteChallengeFn
   });
   
   Template.ActivityDashboard.events({
@@ -114,14 +125,7 @@ if (Meteor.isClient) {
       };
       Challenges.insert(x);
     },
-    "click .deleteChallengeLink": function(event){
-      var x = Challenges.findOne({
-        activity: this.activity,
-        challenger: Meteor.userId(),
-        opponent: event.target.id 
-      });
-      Challenges.remove(x._id);
-    }
+    "click .deleteChallengeLink": deleteChallengeFn
   })
   
   Accounts.ui.config({
@@ -152,6 +156,17 @@ if (Meteor.isServer) {
 
 Router.route('/', function () {
   this.render('Home');
+});
+
+Router.route('/users/playerid/:playerid', function () {
+  var player = Players.findOne(this.params.playerid);
+  var user = Meteor.users.findOne(player.user);
+  this.render('User', {data: user});
+});
+
+Router.route('/users/self', function () {
+  console.log(Meteor.user());
+  this.render('User', {data: Meteor.user()});
 });
 
 Router.route('/challenges', function () {
