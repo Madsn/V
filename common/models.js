@@ -27,7 +27,8 @@ Players.helpers({
     if (!player) return false;
     return Challenges.findOne({
       challenger: player._id,
-      activity: this.activity
+      activity: this.activity,
+      opponent: this._id
     });
   },
   userParticipatesInActivity: function() {
