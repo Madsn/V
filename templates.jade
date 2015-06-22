@@ -1,27 +1,5 @@
-template(name="layout")
-  head
-    title V
-  body
-    .container
-      | {{> Navbar}}
-      div#content
-        | {{>yield}}
-
 template(name="Home")
   | {{> Activitycards}}
-
-template(name="Navbar")
-  nav.navbar.navbar-default.navbar-fixed-top(role='navigation')
-    .container-fluid
-      .container
-        .navbar-header
-          a.navbar-brand(href="/") V
-        .navbar-collapse.collapse
-          ul.nav.navbar-nav
-            li 
-              a(href="/challenges") Challenges
-          ul.nav.navbar-nav.navbar-right
-            | {{> loginButtons}}
 
 template(name="Activitycards")
   .row
