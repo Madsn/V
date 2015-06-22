@@ -99,7 +99,7 @@ Template.ActivityDashboard.events({
     Challenges.insert(x);
   },
   "click .deleteChallengeLink": deleteChallengeFn
-})
+});
 
 Accounts.ui.config({
   passwordSignupFields: "USERNAME_AND_EMAIL"
