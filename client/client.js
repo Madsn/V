@@ -46,13 +46,7 @@ Template.ActivityDashboard.helpers({
 });
 
 var deleteChallengeFn = function(event) {
-  console.log(event.target);
-  var x = Challenges.findOne(event.target.id);
-  if (x) {
-    Challenges.remove(x._id);
-  } else {
-    console.error("Challenge with ID " + event.target.id + " not found");
-  }
+  Meteor.call("deleteChallenge", event.target.id);
 };
 
 Template.Challenges.helpers({

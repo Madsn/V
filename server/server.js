@@ -78,5 +78,17 @@ Meteor.methods({
       challenger: player._id,
       opponent: opponentId 
     });
+  },
+  deleteChallenge: function(challengeId) {
+    var challenge = Challenges.findOne(challengeId);
+    var player = Players.findOne({
+      activity: challenge.activity,
+      user: Meteor.userId()
+    });
+    if (!player || !challenge ||
+       player._id !== challenge.challenger) {
+      throw new Meteor.Error("not-authorized");
+    }
+    Challenges.remove(challenge._id);
   }
 });
