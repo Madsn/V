@@ -4,23 +4,23 @@
 }
 
 .activityimage {
-    position: relative;
-    border: none;
+  position: relative;
+  border: none;
 }
  
 .thumbnail .caption {
-    position: absolute;
-    top: 35%;
-    left: 0;
-    width: 100%;
-    padding: 0px;
+  position: absolute;
+  top: 35%;
+  left: 0;
+  width: 100%;
+  padding: 0px;
 }
 
 .caption h1 {
-    font-size: 400%;
+  font-size: 400%;
 }
 
 .clickable {
-    cursor: pointer;
-    cursor: hand;
+  cursor: pointer;
+  cursor: hand;
 }

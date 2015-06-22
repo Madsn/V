@@ -7,36 +7,42 @@ Template.registerHelper('equals', function (a, b) {
 });
 
 Template.Activitycards.helpers({
-activities: function() {
-  return Activities.find();
-},
-count: function() {
-  return Activities.find().count();
-}
+  activities: function() {
+    return Activities.find();
+  },
+  count: function() {
+    return Activities.find().count();
+  }
 });
 
 Template.ActivityDashboard.helpers({
-players: function() {
-  return this.players().map(function(document, index){
-    document.index = index + 1;
-    return document;
-  });
-},
-userInPlayersList: function() {
-  var x = Players.findOne({
-    activity: this._id, 
-    user: Meteor.userId()
-  });
-  return x ? true : false;
-},
-getChallengeId: function() {
-  var player = Players.findOne({user: Meteor.userId(), activity: this.activity});
-  return Challenges.findOne({
-    opponent: this._id,
-    activity: this.activity,
-    challenger: player._id
-  })._id;
-}
+  players: function() {
+    return this.players().map(function(document, index){
+      document.index = index + 1;
+      return document;
+    });
+  },
+  userInPlayersList: function() {
+    var x = Players.findOne({
+      activity: this._id, 
+      user: Meteor.userId()
+    });
+    return x ? true : false;
+  },
+  getChallengeId: function() {
+    var player = Players.findOne({user: Meteor.userId(), activity: this.activity});
+    return Challenges.findOne({
+      opponent: this._id,
+      activity: this.activity,
+      challenger: player._id
+    })._id;
+  },
+  getRowClass: function() {
+    if (Meteor.userId() === this.user) {
+      return "info";
+    }
+    return "";
+  }
 });
 
 var deleteChallengeFn = function(event) {

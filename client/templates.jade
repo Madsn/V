@@ -21,24 +21,26 @@ template(name="ActivityDashboard")
         th
     tbody
       each players
-        tr
-          td= index
-          td= getUsername
-          td
-            if userParticipatesInActivity
-              if equals currentUser._id user
-                p Can't challenge self
-              else if alreadyChallenged
-                | {{> DeleteChallengeLink getChallengeId }}
-              else
-                a.challengeLink
-                  i(id="{{_id}}").clickable.glyphicon.glyphicon-bullhorn
+        if userParticipatesInActivity
+          tr(class="{{getRowClass}}")
+            td= index
+            td= getUsername
+            td
+              unless equals currentUser._id user
+                if alreadyChallenged
+                  | {{> DeleteChallengeLink getChallengeId }}
+                else
+                  | {{> ChallengeLink }}
   if currentUser
     if userInPlayersList
       button#removeMe Remove me from this list
     else
       button#addMe Add me to this list
       
+template(name="ChallengeLink")
+  a.challengeLink
+    i(id="{{_id}}").clickable.glyphicon.glyphicon-bullhorn
+
 template(name="DeleteChallengeLink")
   a.deleteChallengeLink
     i(id="{{this}}").clickable.glyphicon.glyphicon-remove &nbsp;
