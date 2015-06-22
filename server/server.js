@@ -15,6 +15,13 @@ if (Meteor.users.find().count() === 0){
     profile  : {
     }
   });
+  Accounts.createUser({
+    username: "user3",
+    email : "user3@example.com",
+    password : "123456",
+    profile  : {
+    }
+  });
 } else {
   console.log("No users added");
 }
