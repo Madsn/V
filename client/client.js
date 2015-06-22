@@ -67,24 +67,10 @@ Template.Challenges.events({
 
 Template.ActivityDashboard.events({
   "click #addMe": function(){
-    Players.insert({
-      activity: this._id,
-      user: Meteor.userId()
-    });
+    Meteor.call("addToList", this._id);
   },
   "click #removeMe": function(){
-    var x = Players.findOne({
-      activity: this._id,
-      user: Meteor.userId()
-    });
-    var chal = Challenges.find({
-      $or: [{challenger: x._id}, {opponent: x._id}],
-      activity: x.activity
-    }).fetch();
-    for (var i in chal) {
-      Challenges.remove(chal[i]._id);
-    }
-    Players.remove(x._id);
+    Meteor.call("removeFromList", this._id);
   },
   "click .challengeLink": function(event){
     var player = Players.findOne({

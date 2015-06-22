@@ -40,3 +40,29 @@ if (Activities.find().count() === 0){
     });
 }
 });
+
+Meteor.methods({
+  removeFromList: function (activityId) {
+    if (! Meteor.userId()) {
+      throw new Meteor.Error("not-authorized");
+    }
+    var player = Players.findOne({
+      activity: activityId,
+      user: Meteor.userId()
+    });
+    Challenges.remove({
+      $or: [{challenger: player._id}, {opponent: player._id}],
+      activity: player.activity
+    });
+    Players.remove(player._id);
+  },
+  addToList: function(activityId) {
+    if (! Meteor.userId()) {
+      throw new Meteor.Error("not-authorized");
+    }
+    Players.insert({
+      activity: activityId,
+      user: Meteor.userId()
+    });
+  }
+});
