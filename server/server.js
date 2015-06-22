@@ -64,5 +64,19 @@ Meteor.methods({
       activity: activityId,
       user: Meteor.userId()
     });
+  },
+  createChallenge: function(opponentId, activityId) {
+    if (! Meteor.userId()) {
+      throw new Meteor.Error("not-authorized");
+    }
+    var player = Players.findOne({
+      user: Meteor.userId(), 
+      activity: activityId
+    });
+    Challenges.insert({ 
+      activity: activityId,
+      challenger: player._id,
+      opponent: opponentId 
+    });
   }
 });

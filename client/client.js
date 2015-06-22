@@ -73,16 +73,7 @@ Template.ActivityDashboard.events({
     Meteor.call("removeFromList", this._id);
   },
   "click .challengeLink": function(event){
-    var player = Players.findOne({
-      activity: this.activity,
-      user: Meteor.userId()
-    });
-    var x = {
-      activity: this.activity,
-      challenger: player._id,
-      opponent: event.target.id
-    };
-    Challenges.insert(x);
+    Meteor.call("createChallenge", event.target.id, this.activity);
   },
   "click .deleteChallengeLink": deleteChallengeFn
 });
