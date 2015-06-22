@@ -51,7 +51,7 @@ var deleteChallengeFn = function(event) {
 
 Template.Challenges.helpers({
   challenges: function() {
-    return Challenges.find(); 
+    return Challenges.find();
   }
 });
 
