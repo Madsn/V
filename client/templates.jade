@@ -21,21 +21,20 @@ template(name="ActivityDashboard")
         th
     tbody
       each players
-        if userParticipatesInActivity
-          tr(class="{{getRowClass}}")
-            td= index
-            td= getUsername
-            td
-              unless equals currentUser._id user
-                if alreadyChallenged
-                  | {{> DeleteChallengeLink getChallengeId }}
-                else
-                  | {{> ChallengeLink }}
+        tr(class="{{getRowClass}}")
+          td= index
+          td= getUsername
+          td
+            unless equals currentUser._id user
+              if alreadyChallenged
+                | {{> DeleteChallengeLink getChallengeId }}
+              else
+                | {{> ChallengeLink }}
   if currentUser
     if userInPlayersList
-      button#removeMe Remove me from this list
+      button#removeMe.btn.btn-danger Remove me from this list
     else
-      button#addMe Add me to this list
+      button#addMe.btn.btn-primary Add me to this list
       
 template(name="ChallengeLink")
   a.challengeLink
