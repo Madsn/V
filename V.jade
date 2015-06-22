@@ -51,10 +51,7 @@ template(name="ActivityDashboard")
               if equals currentUser._id user
                 p Can't challenge self
               else if alreadyChallenged
-                a.deleteChallengeLink
-                  i(id="{{getChallengeId}}").clickable.glyphicon.glyphicon-remove &nbsp;
-                a(href="/challenge/{{_id}}/{{activity}}")
-                  i.clickable.glyphicon.glyphicon-eye-open
+                | {{> DeleteChallengeLink getChallengeId }}
               else
                 a.challengeLink
                   i(id="{{_id}}").clickable.glyphicon.glyphicon-bullhorn
@@ -63,6 +60,12 @@ template(name="ActivityDashboard")
       button#removeMe Remove me from this list
     else
       button#addMe Add me to this list
+      
+template(name="DeleteChallengeLink")
+  a.deleteChallengeLink
+    i(id="{{this}}").clickable.glyphicon.glyphicon-remove &nbsp;
+  a(href="/challenge/{{this}}")
+    i.clickable.glyphicon.glyphicon-eye-open
 
 template(name="Challenges")
   h1 stuff
@@ -83,10 +86,7 @@ template(name="Challenges")
           td 
             a(href="/users/playerid/{{opponent}}") {{opponentName}}
           td
-            a.deleteChallengeLink
-              i(id="{{_id}}").clickable.glyphicon.glyphicon-remove &nbsp;
-            a(href="/challenge/{{_id}}")
-              i.clickable.glyphicon.glyphicon-eye-open
+            | {{> DeleteChallengeLink _id }}
           
 template(name="Challenge")
   h1 Challenge view
