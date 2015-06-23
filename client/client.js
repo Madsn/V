@@ -17,10 +17,7 @@ Template.Activitycards.helpers({
 
 Template.ActivityDashboard.helpers({
   players: function() {
-    return this.players().map(function(document, index){
-      document.index = index + 1;
-      return document;
-    });
+    return this.players();
   },
   userInPlayersList: function() {
     var x = Players.findOne({

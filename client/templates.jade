@@ -22,7 +22,7 @@ template(name="ActivityDashboard")
     tbody
       each players
         tr(class="{{getRowClass}}")
-          td= index
+          td= rank
           td= getUsername
           td
             unless equals currentUser._id user
