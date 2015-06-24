@@ -63,7 +63,7 @@ Template.Challenge.events({
   "click #loseButton": function() {
     Meteor.call("reportMatchLost", this._id);
   }
-})
+});
 
 Template.ActivityDashboard.events({
   "click #addMe": function(){
