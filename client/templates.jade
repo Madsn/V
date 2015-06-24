@@ -76,6 +76,9 @@ template(name="Challenge")
       a(href="/users/playerid/{{opponent}}") {{opponentName}}
     li
       a(href="/activities/{{activity}}") {{getActivity.name}}
+  .row
+    button#winButton.btn.btn-success I won
+    button#loseButton.btn.btn-danger I lost
       
 template(name="User")
   h1 User view

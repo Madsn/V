@@ -1,3 +1,35 @@
+var updateRanks = function(challengeId, currentUserWon) {
+  var challenge = Challenges.findOne(challengeId);
+  var challenger = challenge.getChallenger();
+  var opponent = challenge.getOpponent();
+  if (!Meteor.userId() || 
+      !(opponent.user === Meteor.userId() 
+      || challenger.user === Meteor.userId())) {
+    throw new Meteor.Error("not-authorized");
+  }
+  var winner;
+  var loser;
+  if ((opponent.user === Meteor.userId() && currentUserWon)
+      || challenger.user === Meteor.userId() && !currentUserWon) {
+    var winner = opponent;
+    var loser = challenger;
+  } else {
+    var winner = challenger;
+    var loser = opponent;
+  }
+  if (winner.rank < loser.rank) {
+    return;
+  }
+  Players.find({
+    activity: winner.activity, 
+    $and: [{rank: {$gte: loser.rank}}, 
+          {rank: {$lt: winner.rank}}]
+    }).forEach(function(doc){
+    Players.update(doc._id, {$set: {rank: doc.rank + 1}});
+  });
+  Players.update(winner._id, {$set: {rank: loser.rank}});
+};
+
 Meteor.methods({
   removeFromList: function (activityId) {
     if (! Meteor.userId()) {
@@ -53,5 +85,11 @@ Meteor.methods({
       throw new Meteor.Error("not-authorized");
     }
     Challenges.remove(challenge._id);
+  },
+  reportMatchWon: function(challengeId) {
+    updateRanks(challengeId, true);
+  },
+  reportMatchLost: function(challengeId) {
+    updateRanks(challengeId, false);
   }
 });

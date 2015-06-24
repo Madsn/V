@@ -17,7 +17,7 @@ Template.Activitycards.helpers({
 
 Template.ActivityDashboard.helpers({
   players: function() {
-    return this.players();
+    return Players.find({activity: this._id}, {sort: {rank: 1}});
   },
   userInPlayersList: function() {
     var x = Players.findOne({
@@ -55,6 +55,15 @@ Template.Challenges.helpers({
 Template.Challenges.events({
   "click .deleteChallengeLink": deleteChallengeFn
 });
+
+Template.Challenge.events({
+  "click #winButton": function() {
+    Meteor.call("reportMatchWon", this._id);
+  },
+  "click #loseButton": function() {
+    Meteor.call("reportMatchLost", this._id);
+  }
+})
 
 Template.ActivityDashboard.events({
   "click #addMe": function(){

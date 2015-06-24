@@ -9,6 +9,9 @@ Activities.helpers({
 });
 
 Players.helpers({
+  getUser: function() {
+    return Meteor.users.findOne(this.user);
+  },
   getActivity: function() {
     return Activities.findOne({id: this.activity});
   },
@@ -49,5 +52,11 @@ Challenges.helpers({
   getActivity: function(){
     var x = Activities.findOne(this.activity);
     return x;
+  },
+  getOpponent: function() {
+    return Players.findOne(this.opponent);
+  },
+  getChallenger: function() {
+    return Players.findOne(this.challenger);
   }
 });
