@@ -87,8 +87,11 @@ Meteor.methods({
   },
   reportMatchWon: function(challengeId) {
     updateRanks(challengeId, true);
+    var challenge = Challenges.findOne(challengeId);
+    Challenges.remove(challengeId);
   },
   reportMatchLost: function(challengeId) {
     updateRanks(challengeId, false);
+    Challenges.remove(challengeId);
   }
 });
