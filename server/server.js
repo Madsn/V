@@ -43,10 +43,10 @@ Meteor.methods({
       activity: player.activity
     });
     Players.remove(player._id);
-    var players = Players.find({rank: {$gt: player.rank}}).fetch();
-    for (var i in players) {
-      Players.update(players[i]._id, {$set: {rank: players[i].rank - 1}});
-    }
+    Players.find({activity: player.activity, 
+                  rank: {$gt: player.rank}}).forEach(function(doc){
+      Players.update(doc._id, {$set: {rank: doc.rank - 1}});
+    });
   },
   addToList: function(activityId) {
     if (! Meteor.userId()) {
