@@ -29,7 +29,8 @@ template(name="ActivityDashboard")
               if alreadyChallenged
                 | {{> DeleteChallengeLink getChallengeId }}
               else
-                | {{> ChallengeLink }}
+                if canBeChallenged
+                  | {{> ChallengeLink }}
   if currentUser
     if userInPlayersList
       button#removeMe.btn.btn-danger Remove me from this list

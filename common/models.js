@@ -34,6 +34,11 @@ Players.helpers({
       opponent: this._id
     });
   },
+  canBeChallenged: function() {
+    var player = Players.findOne({activity: this.activity, user: Meteor.userId()});
+    if (!player) return false;
+    return player.rank > this.rank && player.rank <= this.rank + 2;
+  },
   userParticipatesInActivity: function() {
     var player = Players.findOne({activity: this.activity, user: Meteor.userId()});
     return player ? true : false;
