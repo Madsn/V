@@ -1,14 +1,17 @@
-<template name="Home">{{> Activitycards}}</template>
+<template name="Home">
+  {{> Activitycards}}
+</template>
+
 <template name="Activitycards">
   <div class="row">
-    <each>activities
+    {{#each activities}}
       <div class="col-lg-4 col-md-6 col-xs-12">
         <div class="thumbnail activityimage text-center"><a href="activities/{{_id}}"><img style="opacity: 0.4" src="{{img}}" class="img-responsive"/>
-            <div class="caption">
-              <h1>{{name}}</h1>
-            </div></a></div>
+        <div class="caption">
+          <h1>{{name}}</h1>
+        </div></a></div>
       </div>
-    </each>
+    {{/each}}
   </div>
 </template>
 
@@ -35,9 +38,20 @@
   </table>
 </template>
 
-<template name="ChallengeLink"><a class="challengeLink"><i id="{{_id}}" class="clickable glyphicon glyphicon-bullhorn"></i></a></template>
+<template name="ChallengeLink">
+  <a class="challengeLink">
+    <i id="{{_id}}" class="clickable glyphicon glyphicon-bullhorn"></i>
+  </a>
+</template>
 
-<template name="DeleteChallengeLink"><a class="deleteChallengeLink"><i id="{{this}}" class="clickable glyphicon glyphicon-remove">&nbsp;</i></a><a href="/challenge/{{this}}"><i class="clickable glyphicon glyphicon-eye-open"></i></a></template>
+<template name="DeleteChallengeLink">
+  <a class="deleteChallengeLink">
+    <i id="{{this}}" class="clickable glyphicon glyphicon-remove">&nbsp;</i>
+  </a>
+  <a href="/challenge/{{this}}">
+    <i class="clickable glyphicon glyphicon-eye-open"></i>
+  </a>
+</template>
 
 <template name="Challenges">
   <h1>For debugging (Shows ALL challenges, for all players)</h1>
@@ -52,12 +66,12 @@
     </thead>
     <tbody>
       {{#each challenges}}
-        <tr>
-          <td><a href="/activities/{{getActivity._id}}">{{getActivity.name}}</a></td>
-          <td><a href="/users/playerid/{{challenger}}">{{challengerName}}</a></td>
-          <td><a href="/users/playerid/{{opponent}}">{{opponentName}}</a></td>
-          <td>{{> DeleteChallengeLink _id }}</td>
-        </tr>
+      <tr>
+        <td><a href="/activities/{{getActivity._id}}">{{getActivity.name}}</a></td>
+        <td><a href="/users/playerid/{{challenger}}">{{challengerName}}</a></td>
+        <td><a href="/users/playerid/{{opponent}}">{{opponentName}}</a></td>
+        <td>{{> DeleteChallengeLink _id }}</td>
+      </tr>
       {{/each}}
     </tbody>
   </table>
@@ -66,15 +80,22 @@
 <template name="Challenge">
   <h1>Challenge view</h1>
   <ul>
-    <li><a href="/users/playerid/{{challenger}}">{{challengerName}}</a></li>
-    <li> <a href="/users/playerid/{{opponent}}">{{opponentName}}</a></li>
-    <li><a href="/activities/{{activity}}">{{getActivity.name}}</a></li>
+    <li>
+      <a href="/users/playerid/{{challenger}}">{{challengerName}}</a>
+    </li>
+    <li>
+      <a href="/users/playerid/{{opponent}}">{{opponentName}}</a>
+    </li>
+    <li>
+      <a href="/activities/{{activity}}">{{getActivity.name}}</a>
+    </li>
   </ul>
   <div class="row">
     <button id="winButton" class="btn btn-success">I won</button>
     <button id="loseButton" class="btn btn-danger">I lost</button>
   </div>
 </template>
+
 <template name="User">
   <h1>User view</h1>
   <ul>
