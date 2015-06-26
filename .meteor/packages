@@ -12,3 +12,5 @@ twbs:bootstrap
 accounts-password
 iron:router
 dburles:collection-helpers
+velocity:html-reporter
+xolvio:cucumber
