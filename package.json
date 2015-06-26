@@ -1,6 +1,7 @@
 {
   "name": "V",
   "scripts": {
-    "start": "meteor"
+    "start": "meteor",
+    "test": "meteor --test"
   }
 }                                                                               
