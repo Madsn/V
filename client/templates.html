@@ -31,11 +31,27 @@
           <td>{{rank}}</td>
           <td>{{getUsername}}</td>
           <td>
+            {{#unless equals currentUser._id user}}
+              {{#if alreadyChallenged}}
+                {{> DeleteChallengeLink getChallengeId}}
+              {{else}}
+                {{#if canBeChallenged}}
+                  {{> ChallengeLink}}
+                {{/if}}
+              {{/if}}
+            {{/unless}}
           </td>
         </tr>
       {{/each}}
     </tbody>
   </table>
+  {{#if currentUser}}
+    {{#if userInPlayersList}}
+      <button id="removeMe" class="btn btn-danger"> Remove me from this list</button>
+    {{else}}
+      <button id="addMe" class="btn btn-primary">Add me to this list</button>
+    {{/if}}
+  {{/if}}
 </template>
 
 <template name="ChallengeLink">

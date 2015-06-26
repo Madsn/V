@@ -21,7 +21,7 @@ Template.ActivityDashboard.helpers({
   },
   userInPlayersList: function() {
     var x = Players.findOne({
-      activity: this._id, 
+      activity: this._id,
       user: Meteor.userId()
     });
     return x ? true : false;
