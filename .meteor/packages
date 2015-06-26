@@ -12,4 +12,4 @@ accounts-password
 iron:router
 dburles:collection-helpers
 velocity:html-reporter
-xolvio:cucumber
+sanjo:jasmine
