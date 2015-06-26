@@ -1,0 +1,25 @@
+<template name="layout">
+  <head>
+    <title>V</title>
+  </head>
+  <body>
+    <div class="container">{{> Navbar}}
+      <div id="content">{{>yield}}</div>
+    </div>
+  </body>
+</template>
+<template name="Navbar">
+  <nav role="navigation" class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="container">
+        <div class="navbar-header"><a href="/" class="navbar-brand">V</a></div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="/challenges">Challenges</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">{{> loginButtons}}</ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+</template>
