@@ -13,3 +13,4 @@ iron:router
 dburles:collection-helpers
 velocity:html-reporter
 sanjo:jasmine
+grigio:babel

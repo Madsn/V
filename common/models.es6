@@ -3,29 +3,29 @@ Players = new Meteor.Collection('players');
 Challenges = new Meteor.Collection('challenges');
 
 Activities.helpers({
-  players: function() {
+  players: () => {
     return Players.find({activity: this._id});
   }
 });
 
 Players.helpers({
-  getUser: function() {
+  getUser: () => {
     return Meteor.users.findOne(this.user);
   },
-  getActivity: function() {
+  getActivity: () => {
     return Activities.findOne({id: this.activity});
   },
-  getUsername: function() {
+  getUsername: () => {
     var user = Meteor.users.findOne({_id: this.user});
     return user ? user.username : "";
   },
-  getSentChallenges: function() {
+  getSentChallenges: () => {
     return Challenges.find({challenger: this._id});
   },
-  getReceivedChallenges: function() {
+  getReceivedChallenges: () => {
     return Challenges.find({opponent: this._id});
   },
-  alreadyChallenged: function() {
+  alreadyChallenged: () => {
     var player = Players.findOne({activity: this.activity, user: Meteor.userId()});
     if (!player) return false;
     return Challenges.findOne({
@@ -34,34 +34,34 @@ Players.helpers({
       opponent: this._id
     });
   },
-  canBeChallenged: function() {
+  canBeChallenged: () => {
     var player = Players.findOne({activity: this.activity, user: Meteor.userId()});
     if (!player) return false;
     return player.rank > this.rank && player.rank <= this.rank + 2;
   },
-  userParticipatesInActivity: function() {
+  userParticipatesInActivity: () => {
     var player = Players.findOne({activity: this.activity, user: Meteor.userId()});
     return player ? true : false;
   }
 });
 
 Challenges.helpers({
-  challengerName: function(){
+  challengerName: () => {
     var challenger = Players.findOne(this.challenger);
     return challenger ? challenger.getUsername() : "";
   },
-  opponentName: function(){
+  opponentName: () => {
     var opponent = Players.findOne(this.opponent);
     return opponent ? opponent.getUsername() : "";
   },
-  getActivity: function(){
+  getActivity: () => {
     var x = Activities.findOne(this.activity);
     return x;
   },
-  getOpponent: function() {
+  getOpponent: () => {
     return Players.findOne(this.opponent);
   },
-  getChallenger: function() {
+  getChallenger: () => {
     return Players.findOne(this.challenger);
   }
 });

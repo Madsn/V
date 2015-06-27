@@ -7,26 +7,27 @@ Template.registerHelper('equals', function (a, b) {
 });
 
 Template.Activitycards.helpers({
-  activities: function() {
+  activities: () => {
+    console.log("Fetching activities");
     return Activities.find();
   },
-  count: function() {
+  count: () => {
     return Activities.find().count();
   }
 });
 
 Template.ActivityDashboard.helpers({
-  players: function() {
+  players: () => {
     return Players.find({activity: this._id}, {sort: {rank: 1}});
   },
-  userInPlayersList: function() {
+  userInPlayersList: () => {
     var x = Players.findOne({
       activity: this._id,
       user: Meteor.userId()
     });
     return x ? true : false;
   },
-  getChallengeId: function() {
+  getChallengeId: () => {
     var player = Players.findOne({user: Meteor.userId(), activity: this.activity});
     return Challenges.findOne({
       opponent: this._id,
@@ -34,7 +35,7 @@ Template.ActivityDashboard.helpers({
       challenger: player._id
     })._id;
   },
-  getRowClass: function() {
+  getRowClass: () => {
     if (Meteor.userId() === this.user) {
       return "info";
     }
@@ -42,12 +43,12 @@ Template.ActivityDashboard.helpers({
   }
 });
 
-var deleteChallengeFn = function(event) {
+var deleteChallengeFn = (event) => {
   Meteor.call("deleteChallenge", event.target.id);
 };
 
 Template.Challenges.helpers({
-  challenges: function() {
+  challenges: () => {
     return Challenges.find();
   }
 });
@@ -57,24 +58,24 @@ Template.Challenges.events({
 });
 
 Template.Challenge.events({
-  "click #winButton": function() {
+  "click #winButton": () => {
     Meteor.call("reportMatchWon", this._id);
     Router.go('/activities/' + this.activity);
   },
-  "click #loseButton": function() {
+  "click #loseButton": () => {
     Meteor.call("reportMatchLost", this._id);
     Router.go('/activities/' + this.activity);
   }
 });
 
 Template.ActivityDashboard.events({
-  "click #addMe": function(){
+  "click #addMe": () => {
     Meteor.call("addToList", this._id);
   },
-  "click #removeMe": function(){
+  "click #removeMe": () => {
     Meteor.call("removeFromList", this._id);
   },
-  "click .challengeLink": function(event){
+  "click .challengeLink": (event) => {
     Meteor.call("createChallenge", event.target.id, this.activity);
   },
   "click .deleteChallengeLink": deleteChallengeFn

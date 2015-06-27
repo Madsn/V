@@ -38,5 +38,7 @@ Meteor.startup(function () {
         name: "Foosball",
         img: "http://i.imgur.com/pD6PNLE.jpg"
       });
+  } else {
+    console.log("No activities added");
   }
 });
