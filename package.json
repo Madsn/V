@@ -2,6 +2,6 @@
   "name": "V",
   "scripts": {
     "start": "meteor",
-    "test": "meteor --test"
+    "test": "meteor --test --release velocity:METEOR@1.1.0.2_2"
   }
 }                                                                               

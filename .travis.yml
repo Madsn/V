@@ -4,7 +4,7 @@ node_js:
   - "0.10"
 
 before_install:
-  - "curl https://install.meteor.com | /bin/sh"
+  - "curl -L http://git.io/ejPSng | /bin/sh"
   - "npm install -g phantomjs"
 
 notifications:
