@@ -13,4 +13,5 @@ iron:router
 dburles:collection-helpers
 grigio:babel
 sanjo:jasmine
-velocity:console-reporter
+velocity:html-reporter
+xolvio:cucumber
