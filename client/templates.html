@@ -35,7 +35,7 @@
           <td>{{rank}}</td>
           <td>{{getUsername}}</td>
           <td>
-            {{#unless equals currentUser._id user}}
+            {{#if $neq currentUser._id user}}
               {{#if alreadyChallenged}}
                 {{> DeleteChallengeLink getChallengeId}}
               {{else}}
@@ -43,7 +43,7 @@
                   {{> ChallengeLink}}
                 {{/if}}
               {{/if}}
-            {{/unless}}
+            {{/if}}
           </td>
         </tr>
       {{/each}}

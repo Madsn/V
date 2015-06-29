@@ -2,10 +2,6 @@ Meteor.subscribe('activities');
 Meteor.subscribe('players');
 Meteor.subscribe('challenges');
 
-Template.registerHelper('equals', function (a, b) {
-  return a === b;
-});
-
 Template.Activitycards.helpers({
   activities: () => {
     console.log("Fetching activities");
