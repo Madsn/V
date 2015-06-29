@@ -1,0 +1,9 @@
+{
+  "public": {
+
+  },
+  "kadira": { 
+    "appId": "appid", 
+    "appSecret": "appsecret" 
+  }
+}
