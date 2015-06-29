@@ -19,3 +19,4 @@ meteorhacks:fast-render
 raix:handlebar-helpers
 fastclick
 meteorhacks:kadira
+meteorhacks:kadira-profiler
