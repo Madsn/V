@@ -15,3 +15,4 @@ grigio:babel
 sanjo:jasmine
 velocity:html-reporter
 xolvio:cucumber
+meteorhacks:fast-render
