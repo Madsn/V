@@ -23,7 +23,7 @@ var updateRanks = function(challengeId, currentUserWon) {
   Players.find({activity: winner.activity,
                 $and: [{rank: {$gte: loser.rank}},
                 {rank: {$lt: winner.rank}}]})
-              .forEach((doc) => {
+              .forEach(function(doc) {
     Players.update(doc._id, {$set: {rank: doc.rank + 1}});
   });
   Players.update(winner._id, {$set: {rank: loser.rank}});
@@ -44,12 +44,11 @@ Meteor.methods({
     });
     Players.remove(player._id);
     Players.find({activity: player.activity,
-                  rank: {$gt: player.rank}}).forEach((doc) => {
+                  rank: {$gt: player.rank}}).forEach(function(doc) {
       Players.update(doc._id, {$set: {rank: doc.rank - 1}});
     });
   },
   addToList: function(activityId) {
-    console.log("Adding to list " + activityId);
     if (! Meteor.userId()) {
       throw new Meteor.Error("not-authorized");
     }
