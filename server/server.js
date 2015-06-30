@@ -1,4 +1,4 @@
-var updateRanks = (challengeId, currentUserWon) => {
+var updateRanks = function(challengeId, currentUserWon) {
   var challenge = Challenges.findOne(challengeId);
   var challenger = challenge.getChallenger();
   var opponent = challenge.getOpponent();
@@ -30,7 +30,7 @@ var updateRanks = (challengeId, currentUserWon) => {
 };
 
 Meteor.methods({
-  removeFromList: (activityId) => {
+  removeFromList: function(activityId) {
     if (! Meteor.userId()) {
       throw new Meteor.Error("not-authorized");
     }
@@ -48,7 +48,8 @@ Meteor.methods({
       Players.update(doc._id, {$set: {rank: doc.rank - 1}});
     });
   },
-  addToList: (activityId) => {
+  addToList: function(activityId) {
+    console.log("Adding to list " + activityId);
     if (! Meteor.userId()) {
       throw new Meteor.Error("not-authorized");
     }
@@ -59,7 +60,7 @@ Meteor.methods({
       user: Meteor.userId()
     });
   },
-  createChallenge: (opponentId, activityId) => {
+  createChallenge: function(opponentId, activityId) {
     if (! Meteor.userId()) {
       throw new Meteor.Error("not-authorized");
     }
@@ -73,7 +74,7 @@ Meteor.methods({
       opponent: opponentId
     });
   },
-  deleteChallenge: (challengeId) => {
+  deleteChallenge: function(challengeId) {
     var challenge = Challenges.findOne(challengeId);
     var player = Players.findOne({
       activity: challenge.activity,
@@ -85,12 +86,12 @@ Meteor.methods({
     }
     Challenges.remove(challenge._id);
   },
-  reportMatchWon: (challengeId) => {
+  reportMatchWon: function(challengeId) {
     updateRanks(challengeId, true);
     var challenge = Challenges.findOne(challengeId);
     Challenges.remove(challengeId);
   },
-  reportMatchLost: (challengeId) => {
+  reportMatchLost: function(challengeId) {
     updateRanks(challengeId, false);
     Challenges.remove(challengeId);
   }

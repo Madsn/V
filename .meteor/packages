@@ -11,7 +11,6 @@ twbs:bootstrap
 accounts-password
 iron:router
 dburles:collection-helpers
-grigio:babel
 sanjo:jasmine
 velocity:html-reporter
 xolvio:cucumber
