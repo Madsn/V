@@ -19,3 +19,5 @@ raix:handlebar-helpers
 fastclick
 meteorhacks:kadira
 meteorhacks:kadira-profiler
+orionjs:core
+orionjs:bootstrap
