@@ -1,0 +1,42 @@
+<template name="Challenges">
+  <h1>For debugging (Shows ALL challenges, for all players)</h1>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Activity</th>
+        <th>Challenger</th>
+        <th>Opponent</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each challenges}}
+        <tr>
+          <td><a href="/activities/{{getActivity._id}}">{{getActivity.name}}</a></td>
+          <td><a href="/users/playerid/{{challenger}}">{{challengerName}}</a></td>
+          <td><a href="/users/playerid/{{opponent}}">{{opponentName}}</a></td>
+          <td>{{> DeleteChallengeLink _id }}</td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</template>
+
+<template name="Challenge">
+  <h1>Challenge view</h1>
+  <ul>
+    <li>
+      <a href="/users/playerid/{{challenger}}">{{challengerName}}</a>
+    </li>
+    <li>
+      <a href="/users/playerid/{{opponent}}">{{opponentName}}</a>
+    </li>
+    <li>
+      <a href="/activities/{{activity}}">{{getActivity.name}}</a>
+    </li>
+  </ul>
+  <div class="row">
+    <button id="winButton" class="btn btn-success">I won</button>
+    <button id="loseButton" class="btn btn-danger">I lost</button>
+  </div>
+</template>

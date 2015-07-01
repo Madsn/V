@@ -1,0 +1,53 @@
+<template name="ActivityDashboard">
+  <h1>Dashboard for Activity {{name}}</h1>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Rank</th>
+        <th>Name</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each players}}
+        <tr class="{{getRowClass}}">
+          <td>{{rank}}</td>
+          <td>{{getUsername}}</td>
+          <td>
+            {{#if $neq currentUser._id user}}
+              {{#if alreadyChallenged}}
+                {{> DeleteChallengeLink getChallengeId}}
+              {{else}}
+                {{#if canBeChallenged}}
+                  {{> ChallengeLink}}
+                {{/if}}
+              {{/if}}
+            {{/if}}
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+  {{#if currentUser}}
+    {{#if userInPlayersList}}
+      <button id="removeMe" class="btn btn-danger"> Remove me from this list</button>
+    {{else}}
+      <button id="addMe" class="btn btn-primary">Add me to this list</button>
+    {{/if}}
+  {{/if}}
+</template>
+
+<template name="ChallengeLink">
+  <a class="challengeLink">
+    <i id="{{_id}}" class="clickable glyphicon glyphicon-bullhorn"></i>
+  </a>
+</template>
+
+<template name="DeleteChallengeLink">
+  <a class="deleteChallengeLink">
+    <i id="{{this}}" class="clickable glyphicon glyphicon-remove">&nbsp;</i>
+  </a>
+  <a href="/challenge/{{this}}">
+    <i class="clickable glyphicon glyphicon-eye-open"></i>
+  </a>
+</template>
