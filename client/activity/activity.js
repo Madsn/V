@@ -1,3 +1,5 @@
+"use strict";
+
 Template.ActivityDashboard.helpers({
   players: function() {
     return Players.find({activity: this._id}, {sort: {rank: 1}});

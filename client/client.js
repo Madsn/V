@@ -1,3 +1,5 @@
+"use strict";
+
 Meteor.subscribe('activities');
 Meteor.subscribe('players');
 Meteor.subscribe('challenges');

@@ -1,3 +1,5 @@
+"use strict";
+
 Template.Challenges.helpers({
   challenges: function() {
     return Challenges.find();

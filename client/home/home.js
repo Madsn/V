@@ -1,3 +1,5 @@
+"use strict";
+
 Template.Activitycards.helpers({
   activities: function() {
     console.log("Fetching activities");

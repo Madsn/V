@@ -1,3 +1,5 @@
+// "use strict"; // can't be enabled in this file.
+
 Activities = new Meteor.Collection('activities');
 Players = new Meteor.Collection('players');
 Challenges = new Meteor.Collection('challenges');

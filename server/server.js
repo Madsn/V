@@ -1,3 +1,5 @@
+"use strict";
+
 var updateRanks = function(challengeId, currentUserWon) {
   var challenge = Challenges.findOne(challengeId);
   var challenger = challenge.getChallenger();

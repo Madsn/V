@@ -1,3 +1,5 @@
+"use strict";
+
 Activities.helpers({
   players: function() {
     return Players.find({activity: this._id});
