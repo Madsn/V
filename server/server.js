@@ -77,6 +77,7 @@ Meteor.methods({
   },
   deleteChallenge: function(challengeId) {
     var challenge = Challenges.findOne(challengeId);
+    if (!challenge) return;
     var player = Players.findOne({
       activity: challenge.activity,
       user: Meteor.userId()

@@ -37,5 +37,5 @@ Template.ActivityDashboard.events({
   "click .challengeLink": function(event) {
     Meteor.call("createChallenge", event.target.id, this.activity);
   },
-  "click .deleteChallengeLink": deleteChallengeFn
+  "click .deleteChallengeLink": Meteor.C.deleteChallengeFn
 });

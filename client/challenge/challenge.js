@@ -7,7 +7,7 @@ Template.Challenges.helpers({
 });
 
 Template.Challenges.events({
-  "click .deleteChallengeLink": deleteChallengeFn
+  "click .deleteChallengeLink": Meteor.C.deleteChallengeFn
 });
 
 Template.Challenge.events({
