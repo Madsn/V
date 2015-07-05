@@ -1,5 +1,14 @@
 "use strict";
 
+Meteor.publish('activities', function(){
+  return Activities.find();
+});
+Meteor.publish('challenges', function(){
+  return Challenges.find();
+});
+Meteor.publish('players', function(){
+  return Players.find();
+});
 var updateRanks = function(challengeId, currentUserWon) {
   var challenge = Challenges.findOne(challengeId);
   var challenger = challenge.getChallenger();
